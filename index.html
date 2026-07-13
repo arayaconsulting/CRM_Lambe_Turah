@@ -150,28 +150,7 @@
         fetch(scriptURL, { method: 'POST', body: new FormData(e.target)})
         .then(res => res.json()).then(res => {
             if (res.success) {
-                // JIKA USER SUDAH PERNAH TERDAFTAR SEBELUMNYA (TOLAK & TAMPILKAN KARTU LAMA)
-                if (res.is_lama) {
-                    alert('Nomor WhatsApp ini sudah terdaftar sebagai member sebelumnya! Menampilkan kembali kartu Anda...');
-                    document.getElementById('resNamaMember').innerText = res.nama.toUpperCase();
-                    document.getElementById('resHPMember').innerText = res.hp;
-                    document.getElementById('resKodeMember').innerText = res.kode;
-                    
-                    document.getElementById('mainForm').style.display = 'none';
-                    document.getElementById('wadahVoucher').style.display = 'none';
-                    document.getElementById('statusPesan').innerText = "ANDA SUDAH TERDAFTAR SEBAGAI MEMBER! 💳";
-                    
-                    setTimeout(() => {
-                        html2canvas(document.getElementById('vCaptureMember'), {scale: 3, useCORS: true}).then(canvas => {
-                            document.getElementById('finalMember').src = canvas.toDataURL("image/png");
-                            document.getElementById('resultArea').style.display = 'block';
-                            window.scrollTo(0,0);
-                        });
-                    }, 500);
-                    return;
-                }
-
-                // JIKA DATA INPUT BARU BERHASIL MASUK
+                // JIKA INPUT BARU BERHASIL MASUK, BARU CETAK KARTU
                 document.getElementById('resKodeVoucher').innerText = res.kode;
                 document.getElementById('resNamaMember').innerText = res.nama.toUpperCase();
                 document.getElementById('resHPMember').innerText = res.hp;
@@ -222,13 +201,14 @@
                     }, 600);
                 }
             } else {
-                alert(res.message);
+                // JIKA TERDETEKSI ADANYA DATA DOBEL DARI SERVER
+                alert(res.message); 
                 document.getElementById('btnText').style.display = 'block';
                 document.getElementById('spinner').style.display = 'none';
                 btn.disabled = false;
             }
         }).catch(err => {
-            alert('Sistem sedang sibuk atau URL tidak merespons. Pastikan Apps Script sudah di-deploy ke Versi Baru.');
+            alert('Sistem sedang melakukan sinkronisasi data.');
             location.reload();
         });
     });
