@@ -59,15 +59,16 @@
                 <input type="text" name="pekerjaan" class="form-control" placeholder="Mahasiswa / Karyawan / Umum" required>
             </div>
 
+            <!-- UPDATE PERGESERAN TANGGAL PROMO PADA FORM -->
             <div class="form-group text-left mt-4">
                 <label class="small font-weight-bold text-danger text-uppercase">Rencana Kedatangan Promo</label>
                 <p class="text-white-50" style="font-size: 11px; margin-top: -5px;">*Pilih promo yang ingin diikuti (bisa pilih lebih dari satu)</p>
                 
-                <label class="promo-choice"><input type="checkbox" name="p17" value="YA"> 17 Juli: Gratis Es Teh 🥤</label>
-                <label class="promo-choice"><input type="checkbox" name="p18" value="YA"> 18 Juli: Tebus Murah Ceker + Nasi Rp 15.000 🍛</label>
-                <label class="promo-choice"><input type="checkbox" name="p19" value="YA"> 19 Juli: Gratis Nasi (Tiap Beli Lauk) 🍚</label>
-                <label class="promo-choice"><input type="checkbox" name="p20" value="YA"> 20 Juli: BUY 1 GET 1 FREE Menu Usus 🥢</label>
-                <label class="promo-choice"><input type="checkbox" name="p21" value="YA"> 21 Juli: BUY 1 GET 1 FREE Menu Kerang Hijau 🦪</label>
+                <label class="promo-choice"><input type="checkbox" name="p18" value="YA"> 18 Juli: Gratis Es Teh 🥤</label>
+                <label class="promo-choice"><input type="checkbox" name="p19" value="YA"> 19 Juli: Tebus Murah Ceker + Nasi Rp 15.000 🍛</label>
+                <label class="promo-choice"><input type="checkbox" name="p20" value="YA"> 20 Juli: Gratis Nasi (Tiap Beli Lauk) 🍚</label>
+                <label class="promo-choice"><input type="checkbox" name="p21" value="YA"> 21 Juli: BUY 1 GET 1 FREE Menu Usus 🥢</label>
+                <label class="promo-choice"><input type="checkbox" name="p22" value="YA"> 22 Juli: BUY 1 GET 1 FREE Menu Kerang Hijau 🦪</label>
             </div>
 
             <button type="submit" id="btnSubmit" class="btn-submit shadow">
@@ -162,19 +163,18 @@
                 
                 document.getElementById('mainForm').style.display = 'none';
 
-                // PROSES PEMILIHAN CHECKBOX TANGGAL PROMO
+                // UPDATE PERGESERAN LOGIKA RENDER TANGGAL PADA TIKET KARTU VOUCHER
                 let listHTML = '<span style="font-weight: 800; font-size: 13px; margin-bottom: 10px; display: block; text-align: center; color: #f1c40f;">🔥 DAFTAR PROMO ANDA 🔥</span>';
                 let adaPromo = false;
 
-                if (document.querySelector('input[name="p17"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>17 JULI :</b> <span style="color:#e74c3c; font-weight:700;">GRATIS ES TEH MANIS</span></div>'; adaPromo = true; }
-                if (document.querySelector('input[name="p18"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>18 JULI :</b> <span style="color:#e74c3c; font-weight:700;">TEBUS CEKER+NASI RP 15.000</span></div>'; adaPromo = true; }
-                if (document.querySelector('input[name="p19"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>19 JULI :</b> <span style="color:#e74c3c; font-weight:700;">GRATIS NASI (TIAP BELI LAUK)</span></div>'; adaPromo = true; }
-                if (document.querySelector('input[name="p20"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>20 JULI :</b> <span style="color:#e74c3c; font-weight:700;">BUY 1 GET 1 FREE MENU USUS</span></div>'; adaPromo = true; }
-                if (document.querySelector('input[name="p21"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>21 JULI :</b> <span style="color:#e74c3c; font-weight:700;">BUY 1 GET 1 FREE KERANG HIJAU</span></div>'; adaPromo = true; }
+                if (document.querySelector('input[name="p18"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>18 JULI :</b> <span style="color:#e74c3c; font-weight:700;">GRATIS ES TEH MANIS</span></div>'; adaPromo = true; }
+                if (document.querySelector('input[name="p19"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>19 JULI :</b> <span style="color:#e74c3c; font-weight:700;">TEBUS CEKER+NASI RP 15.000</span></div>'; adaPromo = true; }
+                if (document.querySelector('input[name="p20"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>20 JULI :</b> <span style="color:#e74c3c; font-weight:700;">GRATIS NASI (TIAP BELI LAUK)</span></div>'; adaPromo = true; }
+                if (document.querySelector('input[name="p21"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>21 JULI :</b> <span style="color:#e74c3c; font-weight:700;">BUY 1 GET 1 FREE MENU USUS</span></div>'; adaPromo = true; }
+                if (document.querySelector('input[name="p22"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>22 JULI :</b> <span style="color:#e74c3c; font-weight:700;">BUY 1 GET 1 FREE KERANG HIJAU</span></div>'; adaPromo = true; }
 
                 document.getElementById('listPromoTerpilih').innerHTML = listHTML;
 
-                // JIKA DAFTAR PASCA KELUAR PERIODE PROMO (TIDAK MENCENTANG TANGGAL)
                 if (!adaPromo) {
                     document.getElementById('wadahVoucher').style.display = 'none';
                     document.getElementById('statusPesan').innerText = "KARTU MEMBER PERMANEN BERHASIL DICETAK! ✅";
@@ -187,7 +187,6 @@
                         });
                     }, 500);
                 } else {
-                    // PERIODE PROMO: CETAK DUA KARTU SEKALIGUS
                     document.getElementById('wadahVoucher').style.display = 'block';
                     document.getElementById('statusPesan').innerText = "PENDAFTARAN BERHASIL! SILAKAN SIMPAN KEDUA KARTU DI BAWAH INI. ✅";
                     
