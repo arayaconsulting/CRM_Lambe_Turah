@@ -25,14 +25,29 @@
         .spinner { display: none; width: 20px; height: 20px; border: 3px solid #fff; border-radius: 50%; border-top-color: transparent; animation: spin 0.8s linear infinite; margin-left: 10px; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* KODE CSS UNTUK WA MELAYANG INTERAKTIF + BALON TEKS PETUNJUK */
+        /* PERBAIKAN STRUKTUR POSISI TOMBOL DAN BALON TEKS AGAR TIDAK MENUTUPI TOMBOL FORM */
         .whatsapp-container {
             position: fixed;
             bottom: 25px;
             right: 25px;
-            z-index: 1000;
+            z-index: 9999;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .whatsapp-tooltip {
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #25d366;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            pointer-events: none;
         }
         .whatsapp-float {
             width: 60px;
@@ -46,7 +61,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
+            text-decoration: none !important;
             transition: all 0.3s ease;
             animation: pulseWA 2s infinite;
         }
@@ -54,19 +69,6 @@
             background-color: #20ba5a;
             color: #fff;
             transform: scale(1.1);
-        }
-        .whatsapp-tooltip {
-            background: #1a1a1a;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin-right: 10px;
-            border: 1px solid #25d366;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            white-space: nowrap;
-            letter-spacing: 0.5px;
         }
         @keyframes pulseWA {
             0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
@@ -119,11 +121,11 @@
                 <label class="small font-weight-bold text-danger text-uppercase">Rencana Kedatangan Promo</label>
                 <p class="text-white-50" style="font-size: 11px; margin-top: -5px;">*Pilih promo yang ingin diikuti (bisa pilih lebih dari satu)</p>
                 
-                <label class="promo-choice"><input type="checkbox" name="p18" value="YA"> 18 Juli: Gratis Es Teh 🥤</label>
-                <label class="promo-choice"><input type="checkbox" name="p19" value="YA"> 19 Juli: Tebus Murah Ceker + Nasi Rp 15.000 🍛</label>
-                <label class="promo-choice"><input type="checkbox" name="p20" value="YA"> 20 Juli: Gratis Nasi (Tiap Beli Lauk) 🍚</label>
-                <label class="promo-choice"><input type="checkbox" name="p21" value="YA"> 21 Juli: BUY 1 GET 1 FREE Menu Usus 🥢</label>
-                <label class="promo-choice"><input type="checkbox" name="p22" value="YA"> 22 Juli: BUY 1 GET 1 FREE Menu Kerang Hijau 🦪</label>
+                <label class="promo-choice"><input type="checkbox" name="p18" value="YA"> 18 Juli (Soft Opening): Gratis Es Teh 🥤</label>
+                <label class="promo-choice"><input type="checkbox" name="p19" value="YA"> 19 Juli (Soft Opening): Tebus Murah Ceker + Nasi Rp 15.000 🍛</label>
+                <label class="promo-choice"><input type="checkbox" name="p20" value="YA"> 20 Juli (Soft Opening): Gratis Nasi (Tiap Beli Lauk) 🍚</label>
+                <label class="promo-choice"><input type="checkbox" name="p21" value="YA"> 21 Juli (Grand Opening): BUY 1 GET 1 FREE Menu Usus 🥢</label>
+                <label class="promo-choice"><input type="checkbox" name="p22" value="YA"> 22 Juli (Grand Opening): BUY 1 GET 1 FREE Menu Kerang Hijau 🦪</label>
             </div>
 
             <button type="submit" id="btnSubmit" class="btn-submit shadow">
@@ -207,7 +209,6 @@
         fetch(scriptURL, { method: 'POST', body: new FormData(e.target)})
         .then(res => res.json()).then(res => {
             if (res.success) {
-                // JIKA INPUT BARU BERHASIL MASUK, BARU CETAK KARTU
                 document.getElementById('resKodeVoucher').innerText = res.kode;
                 document.getElementById('resNamaMember').innerText = res.nama.toUpperCase();
                 document.getElementById('resHPMember').innerText = res.hp;
@@ -218,11 +219,12 @@
                 let listHTML = '<span style="font-weight: 800; font-size: 13px; margin-bottom: 10px; display: block; text-align: center; color: #f1c40f;">🔥 DAFTAR PROMO ANDA 🔥</span>';
                 let adaPromo = false;
 
-                if (document.querySelector('input[name="p18"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>18 JULI :</b> <span style="color:#e74c3c; font-weight:700;">GRATIS ES TEH MANIS</span></div>'; adaPromo = true; }
-                if (document.querySelector('input[name="p19"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>19 JULI :</b> <span style="color:#e74c3c; font-weight:700;">TEBUS CEKER+NASI RP 15.000</span></div>'; adaPromo = true; }
-                if (document.querySelector('input[name="p20"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>20 JULI :</b> <span style="color:#e74c3c; font-weight:700;">GRATIS NASI (TIAP BELI LAUK)</span></div>'; adaPromo = true; }
-                if (document.querySelector('input[name="p21"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>21 JULI :</b> <span style="color:#e74c3c; font-weight:700;">BUY 1 GET 1 FREE MENU USUS</span></div>'; adaPromo = true; }
-                if (document.querySelector('input[name="p22"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>22 JULI :</b> <span style="color:#e74c3c; font-weight:700;">BUY 1 GET 1 FREE KERANG HIJAU</span></div>'; adaPromo = true; }
+                // SINKRONISASI DAFTAR TRANSLASI TEKS KETERANGAN PADA KARTU VOUCHER DIGITAL PENDAFTAR
+                if (document.querySelector('input[name="p18"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>18 JULI (SOFT OPENING) :</b> <span style="color:#e74c3c; font-weight:700;">GRATIS ES TEH MANIS</span></div>'; adaPromo = true; }
+                if (document.querySelector('input[name="p19"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>19 JULI (SOFT OPENING) :</b> <span style="color:#e74c3c; font-weight:700;">TEBUS CEKER+NASI RP 15.000</span></div>'; adaPromo = true; }
+                if (document.querySelector('input[name="p20"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>20 JULI (SOFT OPENING) :</b> <span style="color:#e74c3c; font-weight:700;">GRATIS NASI (TIAP BELI LAUK)</span></div>'; adaPromo = true; }
+                if (document.querySelector('input[name="p21"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>21 JULI (GRAND OPENING) :</b> <span style="color:#e74c3c; font-weight:700;">BUY 1 GET 1 FREE MENU USUS</span></div>'; adaPromo = true; }
+                if (document.querySelector('input[name="p22"]:checked')) { listHTML += '<div style="font-size:11px; margin-bottom:5px;"><b>22 JULI (GRAND OPENING) :</b> <span style="color:#e74c3c; font-weight:700;">BUY 1 GET 1 FREE KERANG HIJAU</span></div>'; adaPromo = true; }
 
                 document.getElementById('listPromoTerpilih').innerHTML = listHTML;
 
