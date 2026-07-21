@@ -14,6 +14,8 @@
         .card-promo { background: #1a1a1a; border-radius: 25px; color: #fff; padding: 25px; border: 2px solid #d32f2f; box-shadow: 0 0 20px rgba(211, 47, 47, 0.2); }
         .form-control { border-radius: 10px; padding: 12px; font-size: 14px; background-color: #262626; border: 1px solid #404040; color: #fff; }
         .form-control:focus { background-color: #333; border-color: #d32f2f; color: #fff; box-shadow: none; }
+        select.form-control { color: #fff !important; }
+        select.form-control option { background-color: #262626; color: #fff; }
         .btn-submit { background: #d32f2f; color: #fff; border-radius: 12px; font-weight: 800; padding: 15px; border: none; width: 100%; margin-top: 15px; transition: 0.3s; display: flex; align-items: center; justify-content: center; text-transform: uppercase; }
         .btn-submit:hover { background: #b71c1c; }
         .promo-choice { background: #262626; border: 1px solid #404040; border-radius: 10px; padding: 12px; margin-bottom: 8px; cursor: pointer; display: block; font-size: 13px; font-weight: 600; color: #ddd; text-align: left; }
@@ -116,9 +118,19 @@
                 <label class="small font-weight-bold text-white-50">TANGGAL LAHIR</label>
                 <input type="date" name="tgl_lahir" class="form-control" required>
             </div>
+            
+            <!-- DROPDOWN PEKERJAAN SPESIFIK -->
             <div class="form-group text-left">
                 <label class="small font-weight-bold text-white-50">PEKERJAAN</label>
-                <input type="text" name="pekerjaan" class="form-control" placeholder="Mahasiswa / Karyawan / Umum" required>
+                <select name="pekerjaan" class="form-control" required>
+                    <option value="" disabled selected>-- Pilih Pekerjaan Anda --</option>
+                    <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
+                    <option value="Karyawan Swasta">Karyawan Swasta</option>
+                    <option value="PNS / ASN / TNI / Polri">PNS / ASN / TNI / Polri</option>
+                    <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
+                    <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
             </div>
 
             <div class="form-group text-left mt-4">
@@ -172,9 +184,12 @@
         <div style="padding: 20px; text-align: center; background: #222; position: relative;">
             <p class="mb-1 small text-white-50" style="font-size: 10px;">BERLAKU KHUSUS TANGGAL:</p>
             <h4 class="font-weight-bold text-warning" id="resTglVoucher" style="margin-bottom: 10px;"></h4>
+            
+            <!-- REVISI TEKS VOUCHER USUS LAMBE TURAH -->
             <div style="background: #1a1a1a; padding: 10px; border-radius: 10px; border: 1px solid #404040; font-size: 11px; color: #fff; margin-bottom: 8px;">
-                🎁 <b>1 Porsi Usus Crispy/Pedas GRATIS</b>
+                🎁 <b>1 Porsi Usus Lambe Turah GRATIS</b>
             </div>
+            
             <div style="background: #d32f2f; color: #fff; padding: 4px; border-radius: 6px; font-size: 10px; font-weight: bold; letter-spacing: 0.5px;">
                 🔴 KHUSUS MAKAN DI TEMPAT (DINE-IN)
             </div>
