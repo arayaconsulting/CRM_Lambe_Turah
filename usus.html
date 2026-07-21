@@ -93,9 +93,10 @@
         <span class="badge badge-warning py-1 px-3" style="font-size: 11px; border-radius: 10px;">⚠️ KHUSUS MAKAN DI TEMPAT (DINE-IN)</span>
     </div>
 
+    <!-- PESAN PENUTUPAN JIKA DIBUKA SETELAH TANGGAL 25 JULI -->
     <div id="closedAlert" class="card-promo shadow-lg text-center" style="display:none;">
         <h4 class="text-danger font-weight-bold mb-3">MOHON MAAF! 🛑</h4>
-        <p class="text-white mb-2" style="font-size: 14px;">Pendaftaran Promo 100 Porsi Usus Gratis hanya dibuka pada tanggal <b>24 & 25 Juli 2026</b>.</p>
+        <p class="text-white mb-2" style="font-size: 14px;">Pendaftaran Promo 100 Porsi Usus Gratis dibuka mulai tanggal <b>21 hingga 25 Juli 2026</b>.</p>
         <p class="text-white-50 small mb-0">Terima kasih atas antusiasme Anda. Sampai jumpa di promo Lambe Turah berikutnya!</p>
     </div>
 
@@ -124,10 +125,10 @@
                 <label class="small font-weight-bold text-danger text-uppercase">PILIH TANGGAL KEDATANGAN PROMO</label>
                 <p class="text-white-50" style="font-size: 11px; margin-top: -5px;">*Kuota terbatas 25 porsi per hari. Pilih salah satu:</p>
                 
-                <label class="promo-choice" id="lbl25"><input type="radio" name="tgl_usus" value="25 Jul" required> 📅 25 Juli 2026 <span class="badge badge-danger float-right" id="badge25">Memuat...</span></label>
-                <label class="promo-choice" id="lbl26"><input type="radio" name="tgl_usus" value="26 Jul" required> 📅 26 Juli 2026 <span class="badge badge-danger float-right" id="badge26">Memuat...</span></label>
-                <label class="promo-choice" id="lbl27"><input type="radio" name="tgl_usus" value="27 Jul" required> 📅 27 Juli 2026 <span class="badge badge-danger float-right" id="badge27">Memuat...</span></label>
-                <label class="promo-choice" id="lbl28"><input type="radio" name="tgl_usus" value="28 Jul" required> 📅 28 Juli 2026 <span class="badge badge-danger float-right" id="badge28">Memuat...</span></label>
+                <label class="promo-choice" id="lbl25"><input type="radio" name="tgl_usus" value="25 Jul" required> 📅 25 Juli 2026 <span class="badge float-right" id="badge25">Memuat...</span></label>
+                <label class="promo-choice" id="lbl26"><input type="radio" name="tgl_usus" value="26 Jul" required> 📅 26 Juli 2026 <span class="badge float-right" id="badge26">Memuat...</span></label>
+                <label class="promo-choice" id="lbl27"><input type="radio" name="tgl_usus" value="27 Jul" required> 📅 27 Juli 2026 <span class="badge float-right" id="badge27">Memuat...</span></label>
+                <label class="promo-choice" id="lbl28"><input type="radio" name="tgl_usus" value="28 Jul" required> 📅 28 Juli 2026 <span class="badge float-right" id="badge28">Memuat...</span></label>
             </div>
 
             <button type="submit" id="btnSubmit" class="btn-submit shadow">
@@ -209,15 +210,15 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwVQvibsM0l9dPEz5l1ahpeTfjH8xy1zdN8ZarlG-xtfG6wLyj3WOUbcO2Edlpij1t_/exec';
 
-    // VALIDASI PENGUNCI TANGGAL AKSES FORM (24 & 25 JULI)
+    // 1. VALIDASI AKSES FORM (AKTIF MULAI SEKARANG HINGGA 25 JULI 2026)
     document.addEventListener("DOMContentLoaded", function() {
         const today = new Date();
         const year = today.getFullYear();
         const month = today.getMonth() + 1; // 7 = Juli
         const date = today.getDate();
 
-        // Aktif hanya pada 24 & 25 Juli 2026
-        const isAksesBuka = (year === 2026 && month === 7 && (date === 24 || date === 25));
+        // Aktif sejak dibuka (21 Jul) sampai tanggal 25 Juli 2026
+        const isAksesBuka = (year === 2026 && month === 7 && (date >= 21 && date <= 25));
 
         if (!isAksesBuka) {
             document.getElementById('mainForm').style.display = 'none';
@@ -240,18 +241,25 @@
         });
     }
 
+    // 2. FUNGSI UPDATE INDIKATOR TAMPILAN SISA ANGKA + WARNA MERAH JIKA KRITIS
     function updateBadge(tgl, terpakai) {
-        const sisa = 25 - terpakai; // Diubah ke batas 25 porsi per hari
+        const sisa = 25 - terpakai; // Batas 25 porsi per hari
         const badge = document.getElementById('badge' + tgl);
         const lbl = document.getElementById('lbl' + tgl);
         const radio = lbl.querySelector('input');
 
         if (sisa <= 0) {
-            badge.innerText = 'KUOTA HABIS ❌';
+            // Jika habis (0 Porsi): Teks Abu-abu & Input dikunci
+            badge.innerText = 'Sisa 0 Porsi (HABIS ❌)';
             badge.className = 'badge badge-secondary float-right';
             lbl.classList.add('disabled');
             radio.disabled = true;
+        } else if (sisa <= 10) {
+            // Jika kritis (1-10 Porsi): Angka Sisa Tampil + Badge Merah Menyala
+            badge.innerText = '⚠️ Sisa ' + sisa + ' Porsi Lagi!';
+            badge.className = 'badge badge-danger float-right font-weight-bold';
         } else {
+            // Jika masih aman (11-25 Porsi): Angka Sisa Tampil + Badge Hijau Aman
             badge.innerText = 'Sisa ' + sisa + ' Porsi';
             badge.className = 'badge badge-success float-right';
         }
