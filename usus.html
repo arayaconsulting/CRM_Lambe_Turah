@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promo 100 Usus Gratis - Lambe Turah</title>
+    <title>Promo 200 Usus Gratis - Lambe Turah</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -90,20 +90,19 @@
             <img src="logo.png" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="Logo Lambe Turah">
         </div>
         <h2 class="font-weight-bold" style="color: #d32f2f; letter-spacing: 1px; margin-top: -10px;">LAMBE TURAH 🍢</h2>
-        <h5 class="font-weight-bold text-warning mb-2">PROMO 100 PORSI USUS GRATIS</h5>
+        <h5 class="font-weight-bold text-warning mb-2">PROMO 200 PORSI USUS GRATIS</h5>
         <p class="small text-white-50 mb-2">Isi data di bawah untuk klaim voucher & kartu member resmi</p>
         
-        <!-- INFORMASI PERINGATAN BADGE (DIPERBARUI S/D 27 JULI 2026) -->
         <div class="d-flex flex-column align-items-center justify-content-center" style="gap: 5px;">
             <span class="badge badge-warning py-1 px-3" style="font-size: 11px; border-radius: 10px;">⚠️ KHUSUS MAKAN DI TEMPAT (DINE-IN)</span>
-            <span class="badge badge-danger py-1 px-3" style="font-size: 11px; border-radius: 10px; background-color: #d32f2f;">⏳ PENDAFTARAN DIBUKA S/D TANGGAL 27 JULI 2026</span>
+            <span class="badge badge-danger py-1 px-3" style="font-size: 11px; border-radius: 10px; background-color: #d32f2f;">🔥 100 PEMBELI PERTAMA / HARI (25 & 26 JULI)</span>
         </div>
     </div>
 
-    <!-- PESAN PENUTUPAN JIKA DIBUKA SETELAH TANGGAL 27 JULI -->
+    <!-- PESAN PENUTUPAN JIKA DIBUKA DI LUAR TANGGAL PROMO -->
     <div id="closedAlert" class="card-promo shadow-lg text-center" style="display:none;">
         <h4 class="text-danger font-weight-bold mb-3">MOHON MAAF! 🛑</h4>
-        <p class="text-white mb-2" style="font-size: 14px;">Pendaftaran Promo 100 Porsi Usus Gratis dibuka mulai tanggal <b>21 hingga 27 Juli 2026</b>.</p>
+        <p class="text-white mb-2" style="font-size: 14px;">Masa pendaftaran Promo 200 Porsi Usus Gratis telah berakhir.</p>
         <p class="text-white-50 small mb-0">Terima kasih atas antusiasme Anda. Sampai jumpa di promo Lambe Turah berikutnya!</p>
     </div>
 
@@ -124,7 +123,6 @@
                 <input type="date" name="tgl_lahir" class="form-control" required>
             </div>
             
-            <!-- DROPDOWN PEKERJAAN SPESIFIK BERGULIR -->
             <div class="form-group text-left">
                 <label class="small font-weight-bold text-white-50">PEKERJAAN</label>
                 <select name="pekerjaan" class="form-control" required>
@@ -140,12 +138,10 @@
 
             <div class="form-group text-left mt-4">
                 <label class="small font-weight-bold text-danger text-uppercase">PILIH TANGGAL KEDATANGAN PROMO</label>
-                <p class="text-white-50" style="font-size: 11px; margin-top: -5px;">*Kuota terbatas 25 porsi per hari. Pilih salah satu:</p>
+                <p class="text-white-50" style="font-size: 11px; margin-top: -5px;">*Kuota terbatas 100 porsi per hari. Pilih salah satu:</p>
                 
                 <label class="promo-choice" id="lbl25"><input type="radio" name="tgl_usus" value="25 Jul" required> 📅 25 Juli 2026 <span class="badge float-right" id="badge25">Memuat...</span></label>
                 <label class="promo-choice" id="lbl26"><input type="radio" name="tgl_usus" value="26 Jul" required> 📅 26 Juli 2026 <span class="badge float-right" id="badge26">Memuat...</span></label>
-                <label class="promo-choice" id="lbl27"><input type="radio" name="tgl_usus" value="27 Jul" required> 📅 27 Juli 2026 <span class="badge float-right" id="badge27">Memuat...</span></label>
-                <label class="promo-choice" id="lbl28"><input type="radio" name="tgl_usus" value="28 Jul" required> 📅 28 Juli 2026 <span class="badge float-right" id="badge28">Memuat...</span></label>
             </div>
 
             <button type="submit" id="btnSubmit" class="btn-submit shadow">
@@ -229,15 +225,15 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwVQvibsM0l9dPEz5l1ahpeTfjH8xy1zdN8ZarlG-xtfG6wLyj3WOUbcO2Edlpij1t_/exec';
 
-    // 1. VALIDASI AKSES FORM (AKTIF MULAI SEKARANG HINGGA 27 JULI 2026)
+    // 1. VALIDASI AKSES FORM (AKTIF MULAI SEKARANG HINGGA 26 JULI 2026)
     document.addEventListener("DOMContentLoaded", function() {
         const today = new Date();
         const year = today.getFullYear();
         const month = today.getMonth() + 1; // 7 = Juli
         const date = today.getDate();
 
-        // Aktif sejak dibuka (21 Jul) sampai tanggal 27 Juli 2026
-        const isAksesBuka = (year === 2026 && month === 7 && (date >= 21 && date <= 27));
+        // Form aktif dari sekarang hingga 26 Juli 2026
+        const isAksesBuka = (year === 2026 && month === 7 && (date >= 22 && date <= 26));
 
         if (!isAksesBuka) {
             document.getElementById('mainForm').style.display = 'none';
@@ -253,16 +249,14 @@
         .then(data => {
             updateBadge('25', data['25_juli']);
             updateBadge('26', data['26_juli']);
-            updateBadge('27', data['27_juli']);
-            updateBadge('28', data['28_juli']);
         }).catch(err => {
             console.log('Gagal memuat kuota', err);
         });
     }
 
-    // 2. FUNGSI UPDATE INDIKATOR TAMPILAN SISA ANGKA + WARNA MERAH JIKA KRITIS
+    // 2. FUNGSI UPDATE INDIKATOR TAMPILAN SISA ANGKA (BATAS 100 PORSI PER HARI)
     function updateBadge(tgl, terpakai) {
-        const sisa = 25 - terpakai; // Batas 25 porsi per hari
+        const sisa = 100 - terpakai; // Batas diubah menjadi 100 porsi per hari
         const badge = document.getElementById('badge' + tgl);
         const lbl = document.getElementById('lbl' + tgl);
         const radio = lbl.querySelector('input');
@@ -273,12 +267,12 @@
             badge.className = 'badge badge-secondary float-right';
             lbl.classList.add('disabled');
             radio.disabled = true;
-        } else if (sisa <= 10) {
-            // Jika kritis (1-10 Porsi): Angka Sisa Tampil + Badge Merah Menyala
+        } else if (sisa <= 15) {
+            // Jika kritis (1-15 Porsi): Angka Sisa Tampil + Badge Merah Menyala
             badge.innerText = '⚠️ Sisa ' + sisa + ' Porsi Lagi!';
             badge.className = 'badge badge-danger float-right font-weight-bold';
         } else {
-            // Jika masih aman (11-25 Porsi): Angka Sisa Tampil + Badge Hijau Aman
+            // Jika masih aman (16-100 Porsi): Angka Sisa Tampil + Badge Hijau Aman
             badge.innerText = 'Sisa ' + sisa + ' Porsi';
             badge.className = 'badge badge-success float-right';
         }
