@@ -93,17 +93,17 @@
         <h5 class="font-weight-bold text-warning mb-2">PROMO 100 PORSI USUS GRATIS</h5>
         <p class="small text-white-50 mb-2">Isi data di bawah untuk klaim voucher & kartu member resmi</p>
         
-        <!-- INFORMASI PERINGATAN KETENTUAN PROMO & BATAS WAKTU PENDAFTARAN -->
+        <!-- INFORMASI PERINGATAN BADGE (DIPERBARUI S/D 27 JULI 2026) -->
         <div class="d-flex flex-column align-items-center justify-content-center" style="gap: 5px;">
             <span class="badge badge-warning py-1 px-3" style="font-size: 11px; border-radius: 10px;">⚠️ KHUSUS MAKAN DI TEMPAT (DINE-IN)</span>
-            <span class="badge badge-danger py-1 px-3" style="font-size: 11px; border-radius: 10px; background-color: #d32f2f;">⏳ PENDAFTARAN DIBUKA S/D TANGGAL 25 JULI 2026</span>
+            <span class="badge badge-danger py-1 px-3" style="font-size: 11px; border-radius: 10px; background-color: #d32f2f;">⏳ PENDAFTARAN DIBUKA S/D TANGGAL 27 JULI 2026</span>
         </div>
     </div>
 
-    <!-- PESAN PENUTUPAN JIKA DIBUKA SETELAH TANGGAL 25 JULI -->
+    <!-- PESAN PENUTUPAN JIKA DIBUKA SETELAH TANGGAL 27 JULI -->
     <div id="closedAlert" class="card-promo shadow-lg text-center" style="display:none;">
         <h4 class="text-danger font-weight-bold mb-3">MOHON MAAF! 🛑</h4>
-        <p class="text-white mb-2" style="font-size: 14px;">Pendaftaran Promo 100 Porsi Usus Gratis dibuka mulai tanggal <b>21 hingga 25 Juli 2026</b>.</p>
+        <p class="text-white mb-2" style="font-size: 14px;">Pendaftaran Promo 100 Porsi Usus Gratis dibuka mulai tanggal <b>21 hingga 27 Juli 2026</b>.</p>
         <p class="text-white-50 small mb-0">Terima kasih atas antusiasme Anda. Sampai jumpa di promo Lambe Turah berikutnya!</p>
     </div>
 
@@ -124,7 +124,7 @@
                 <input type="date" name="tgl_lahir" class="form-control" required>
             </div>
             
-            <!-- DROPDOWN PEKERJAAN SPESIFIK -->
+            <!-- DROPDOWN PEKERJAAN SPESIFIK BERGULIR -->
             <div class="form-group text-left">
                 <label class="small font-weight-bold text-white-50">PEKERJAAN</label>
                 <select name="pekerjaan" class="form-control" required>
@@ -229,15 +229,15 @@
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwVQvibsM0l9dPEz5l1ahpeTfjH8xy1zdN8ZarlG-xtfG6wLyj3WOUbcO2Edlpij1t_/exec';
 
-    // 1. VALIDASI AKSES FORM (AKTIF MULAI SEKARANG HINGGA 25 JULI 2026)
+    // 1. VALIDASI AKSES FORM (AKTIF MULAI SEKARANG HINGGA 27 JULI 2026)
     document.addEventListener("DOMContentLoaded", function() {
         const today = new Date();
         const year = today.getFullYear();
         const month = today.getMonth() + 1; // 7 = Juli
         const date = today.getDate();
 
-        // Aktif sejak dibuka (21 Jul) sampai tanggal 25 Juli 2026
-        const isAksesBuka = (year === 2026 && month === 7 && (date >= 21 && date <= 25));
+        // Aktif sejak dibuka (21 Jul) sampai tanggal 27 Juli 2026
+        const isAksesBuka = (year === 2026 && month === 7 && (date >= 21 && date <= 27));
 
         if (!isAksesBuka) {
             document.getElementById('mainForm').style.display = 'none';
