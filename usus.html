@@ -121,6 +121,8 @@
             <div class="form-group text-left">
                 <label class="small font-weight-bold text-white-50">TANGGAL LAHIR</label>
                 <input type="date" name="tgl_lahir" class="form-control" required>
+                <!-- PERINGATAN KADO ULTAH DITAMBAHKAN DI SINI -->
+                <small class="text-warning" style="font-size: 10px;">*Wajib diisi dengan benar untuk pengiriman Kado Ultah dari kami</small>
             </div>
             
             <div class="form-group text-left">
@@ -256,7 +258,7 @@
 
     // 2. FUNGSI UPDATE INDIKATOR TAMPILAN SISA ANGKA (BATAS 100 PORSI PER HARI)
     function updateBadge(tgl, terpakai) {
-        const sisa = 100 - terpakai; // Batas diubah menjadi 100 porsi per hari
+        const sisa = 100 - terpakai; // Batas 100 porsi per hari
         const badge = document.getElementById('badge' + tgl);
         const lbl = document.getElementById('lbl' + tgl);
         const radio = lbl.querySelector('input');
