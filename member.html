@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Member Resmi - Lambe Turah</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body { font-family: 'Montserrat', sans-serif; background-color: #0d0d0d; color: #fff; }
+        .main-container { max-width: 450px; margin: auto; padding: 20px; }
+        .card-promo { background: #1a1a1a; border-radius: 25px; color: #fff; padding: 25px; border: 2px solid #d32f2f; box-shadow: 0 0 20px rgba(211, 47, 47, 0.2); }
+        .form-control { border-radius: 10px; padding: 12px; font-size: 14px; background-color: #262626; border: 1px solid #404040; color: #fff; }
+        .form-control:focus { background-color: #333; border-color: #d32f2f; color: #fff; box-shadow: none; }
+        select.form-control { color: #fff !important; }
+        select.form-control option { background-color: #262626; color: #fff; }
+        .btn-submit { background: #d32f2f; color: #fff; border-radius: 12px; font-weight: 800; padding: 15px; border: none; width: 100%; margin-top: 15px; transition: 0.3s; display: flex; align-items: center; justify-content: center; text-transform: uppercase; }
+        .btn-submit:hover { background: #b71c1c; }
+        
+        #voucherSection { position: fixed; left: -9999px; top: 0; }
+        .v-box { background: #1a1a1a; width: 380px; color: #fff; border-radius: 20px; overflow: hidden; border: 4px solid #d32f2f; }
+        #resultArea { display: none; text-align: center; margin-top: 20px; }
+        .img-result { max-width: 100%; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); border: 2px solid #d32f2f; }
+        .spinner { display: none; width: 20px; height: 20px; border: 3px solid #fff; border-radius: 50%; border-top-color: transparent; animation: spin 0.8s linear infinite; margin-left: 10px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .whatsapp-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .whatsapp-tooltip {
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #25d366;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
+        .whatsapp-float {
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+            animation: pulseWA 2s infinite;
+        }
+        @keyframes pulseWA {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="whatsapp-container">
+    <div class="whatsapp-tooltip">Butuh Bantuan? Klik di Sini</div>
+    <a href="https://wa.me/6285232526003?text=Halo%20Admin,%20saya%20butuh%20bantuan%20mengenai%20Pendaftaran%20Member%20Lambe%20Turah." class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<div class="main-container text-center">
+    
+    <div class="text-center mb-3 mt-3">
+        <div style="width: 100px; height: 100px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <img src="logo.png" style="max-width: 100%; max-height: 100%; object-fit: contain;" alt="Logo Lambe Turah">
+        </div>
+        <h2 class="font-weight-bold" style="color: #d32f2f; letter-spacing: 1px; margin-top: -10px;">LAMBE TURAH 👑</h2>
+        <h5 class="font-weight-bold text-warning mb-2">OFFICIAL MEMBER REGISTRATION</h5>
+        <p class="small text-white-50 mb-3">Daftar member sekarang untuk kumpulkan poin & dapatkan Kado Ulang Tahun Spesial!</p>
+    </div>
+
+    <div id="mainForm" class="card-promo shadow-lg">
+        <form id="formKlaim">
+            <input type="hidden" name="action" value="daftarMemberBaru">
+            
+            <div class="form-group text-left">
+                <label class="small font-weight-bold text-white-50">NAMA LENGKAP</label>
+                <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap Anda" required>
+            </div>
+            <div class="form-group text-left">
+                <label class="small font-weight-bold text-white-50">NOMOR WHATSAPP</label>
+                <input type="tel" name="hp" class="form-control" placeholder="Contoh: 08123xxxx" required autocomplete="off">
+            </div>
+            <div class="form-group text-left">
+                <label class="small font-weight-bold text-white-50">TANGGAL LAHIR</label>
+                <input type="date" name="tgl_lahir" class="form-control" required>
+                <small class="text-warning" style="font-size: 10px;">*Wajib diisi dengan benar untuk pengiriman Kado Ultah dari kami</small>
+            </div>
+            
+            <div class="form-group text-left">
+                <label class="small font-weight-bold text-white-50">PEKERJAAN</label>
+                <select name="pekerjaan" class="form-control" required>
+                    <option value="" disabled selected>-- Pilih Pekerjaan Anda --</option>
+                    <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
+                    <option value="Karyawan Swasta">Karyawan Swasta</option>
+                    <option value="PNS / ASN / TNI / Polri">PNS / ASN / TNI / Polri</option>
+                    <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
+                    <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+            </div>
+
+            <button type="submit" id="btnSubmit" class="btn-submit shadow">
+                <span id="btnText">DAPATKAN KARTU MEMBER</span>
+                <div id="spinner" class="spinner"></div>
+            </button>
+        </form>
+    </div>
+
+    <div id="resultArea">
+        <div id="statusPesan" class="alert alert-danger font-weight-bold mb-4" style="background:#222; border:1px solid #d32f2f; color:#fff; border-radius:15px; font-size:13px;">
+            KARTU MEMBER RESMI BERHASIL DICETAK! ✅
+        </div>
+        
+        <div id="wadahMember" class="mb-4">
+            <h6 class="text-danger font-weight-bold mb-2">DOWNLOAD KARTU MEMBER PERMANEN</h6>
+            <img id="finalMember" class="img-result">
+        </div>
+        
+        <div class="alert alert-danger mt-3 py-2 px-3" style="border-radius: 15px; font-size: 12px; background: #222; border: 1px solid #d32f2f; color: #fff;">
+            <b>💡 CARA SIMPAN:</b> Tekan lama pada gambar kartu di atas, lalu pilih <b>"Simpan Gambar"</b>.
+        </div>
+        <p class="mt-4 small text-white-50">Tunjukkan nomor WhatsApp atau kartu member ini setiap kali bertransaksi di kasir Lambe Turah.</p>
+        <button onclick="location.reload()" class="btn btn-sm btn-outline-danger mt-2 mb-4">Kembali</button>
+    </div>
+</div>
+
+<div id="voucherSection">
+    <div id="vCaptureMember" class="v-box">
+        <div style="background: #d32f2f; color: #fff; padding: 15px; text-align: center;">
+            <div style="width: 55px; height: 55px; margin: 0 auto 5px; background: #000; border-radius: 50%; padding: 3px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                <img src="logo.png" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            </div>
+            <h5 class="font-weight-bold mb-0" style="letter-spacing: 1px;">💳 OFFICIAL MEMBER CARD</h5>
+            <small>LAMBE TURAH OFFICIAL MEMBER</small>
+        </div>
+        <div style="padding: 30px 25px; text-align: center; background: #222; position: relative;">
+            <p class="mb-1 small text-white-50" style="font-size: 10px;">NAMA MEMBER:</p>
+            <h4 class="font-weight-bold" id="resNamaMember" style="color: #fff; margin-bottom: 12px;"></h4>
+            <p class="mb-1 small text-white-50" style="font-size: 10px;">NOMOR WHATSAPP:</p>
+            <div style="display: inline-block; background: #d32f2f; color: #fff; font-weight: bold; padding: 3px 15px; border-radius: 20px; font-size: 13px;" id="resHPMember"></div>
+        </div>
+        <div style="background: #1a1a1a; padding: 15px; text-align: center; font-size: 11px; border-top: 2px dashed #d32f2f;">
+            <p class="mb-1 font-weight-bold">KODE MEMBER: <span id="resKodeMember" style="color: #d32f2f;"></span></p>
+            <p class="mb-0 text-warning font-weight-bold" style="font-size: 11px;">BERLAKU SELAMANYA</p>
+            <p class="mb-0 text-white-50 mt-2" style="font-size: 8px;">*Kumpulkan poin kelipatan Rp 20.000 untuk ditukar reward menarik</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwVQvibsM0l9dPEz5l1ahpeTfjH8xy1zdN8ZarlG-xtfG6wLyj3WOUbcO2Edlpij1t_/exec';
+
+    document.getElementById('formKlaim').addEventListener('submit', e => {
+        e.preventDefault();
+        document.getElementById('btnText').style.display = 'none';
+        document.getElementById('spinner').style.display = 'block';
+        const btn = document.getElementById('btnSubmit');
+        btn.disabled = true;
+
+        fetch(scriptURL, { method: 'POST', body: new FormData(e.target)})
+        .then(res => res.json()).then(res => {
+            if (res.success) {
+                document.getElementById('resNamaMember').innerText = res.nama.toUpperCase();
+                document.getElementById('resHPMember').innerText = res.hp;
+                document.getElementById('resKodeMember').innerText = res.kode;
+                
+                document.getElementById('mainForm').style.display = 'none';
+
+                setTimeout(() => {
+                    html2canvas(document.getElementById('vCaptureMember'), {scale: 3, useCORS: true}).then(canvasM => {
+                        document.getElementById('finalMember').src = canvasM.toDataURL("image/png");
+                        document.getElementById('resultArea').style.display = 'block';
+                        window.scrollTo(0,0);
+                        
+                        document.getElementById('btnText').style.display = 'block';
+                        document.getElementById('spinner').style.display = 'none';
+                        btn.disabled = false;
+                    });
+                }, 500);
+            } else {
+                alert(res.message); 
+                document.getElementById('btnText').style.display = 'block';
+                document.getElementById('spinner').style.display = 'none';
+                btn.disabled = false;
+            }
+        }).catch(err => {
+            alert('Sistem sedang melakukan sinkronisasi data.');
+            location.reload();
+        });
+    });
+</script>
+</body>
+</html>
